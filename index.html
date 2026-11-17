@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#10152f" />
+    <title>TEAMUP — Gestion de club</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header id="appHeader">
+      <div class="logo">TEAM<span>UP</span></div>
+      <div class="header-right">
+        <span id="headerUser" class="small"></span>
+        <button id="headerLogout" class="btn btn-secondary btn-small hidden">Déconnexion</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="authScreen" class="auth-wrap">
+        <div class="auth-card">
+          <div class="auth-logo">TEAM<span>UP</span></div>
+          <div class="auth-subtitle">La gestion de votre club, simplement.</div>
+
+          <div class="auth-tabs">
+            <button id="tabLogin" class="active" data-tab="login">Connexion</button>
+            <button id="tabRegister" data-tab="register">Inscription</button>
+          </div>
+
+          <div id="loginForm" class="auth-section">
+            <h2>Bienvenue !</h2>
+            <label>Identifiant</label>
+            <input id="loginUsername" placeholder="prenom.nom" autocomplete="username" />
+            <label>Mot de passe</label>
+            <div class="password-field">
+              <input id="loginPassword" type="password" placeholder="Votre mot de passe" autocomplete="current-password" />
+              <button type="button" class="btn btn-secondary btn-small" data-toggle-password="loginPassword">Afficher</button>
+            </div>
+            <button type="button" class="btn" style="width:100%;margin-top:15px" id="loginBtn">Se connecter</button>
+            <p class="auth-help"><a href="#" id="forgotLink">Mot de passe oublié ?</a></p>
+
+            <div id="forgotPasswordPanel" class="item hidden">
+              <h3>🔐 Demander la réinitialisation</h3>
+              <label>Identifiant</label>
+              <input id="forgotUsername" placeholder="prenom.nom" />
+              <label>Prénom</label>
+              <input id="forgotFirst" placeholder="Votre prénom" />
+              <label>Nom</label>
+              <input id="forgotLast" placeholder="Votre nom" />
+              <button type="button" class="btn btn-green" id="submitResetRequestBtn">Envoyer la demande</button>
+            </div>
+          </div>
+
+          <div id="registerForm" class="auth-section hidden">
+            <h2>Créer un compte</h2>
+            <label>Vous êtes</label>
+            <select id="registerRole">
+              <option value="Coach">Coach — créer un club</option>
+              <option value="Joueur">Joueur — rejoindre un club</option>
+              <option value="Parent">Parent — rejoindre un club</option>
+            </select>
+            <label>Prénom</label>
+            <input id="registerFirst" placeholder="Votre prénom" />
+            <label>Nom de famille</label>
+            <input id="registerLast" placeholder="Votre nom" />
+            <div id="clubNameField">
+              <label>Nom du club</label>
+              <input id="registerClubName" placeholder="Ex : TEAMUP Football Club" />
+            </div>
+            <div id="clubCodeField" class="hidden">
+              <label>Code du club</label>
+              <input id="registerClubCode" placeholder="Code donné par votre coach" />
+            </div>
+            <label>Mot de passe</label>
+            <div class="password-field">
+              <input id="registerPassword" type="password" placeholder="6 caractères minimum" />
+              <button type="button" class="btn btn-secondary btn-small" data-toggle-password="registerPassword">Afficher</button>
+            </div>
+            <button type="button" class="btn" style="width:100%;margin-top:15px" id="registerBtn">Créer mon compte</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="mainApp" class="hidden">
+        <div class="panel">
+          <div class="row">
+            <div>
+              <h2 id="welcomeTitle" style="margin-bottom:5px">Bienvenue</h2>
+              <span id="clubSubtitle" class="muted"></span>
+            </div>
+            <span id="roleBadge" class="badge">Membre</span>
+          </div>
+        </div>
+
+        <nav class="nav" id="mainNav">
+          <button class="active" data-page="dashboard">🏠 Accueil</button>
+          <button data-page="messages">💬 Messages</button>
+          <button data-page="news">📢 Actualités</button>
+          <button data-page="calendar">📅 Calendrier</button>
+          <button data-page="members">🧑‍🤝‍🧑 Membres</button>
+          <button data-page="account">👤 Mon compte</button>
+        </nav>
+
+        <section id="page-dashboard" class="page">
+          <div class="panel">
+            <h2>Tableau de bord</h2>
+            <div class="grid">
+              <div class="stat-card"><div class="stat-number" id="statMembers">0</div><div class="stat-label">Membres</div></div>
+              <div class="stat-card"><div class="stat-number" id="statMessages">0</div><div class="stat-label">Messages</div></div>
+              <div class="stat-card"><div class="stat-number" id="statEvents">0</div><div class="stat-label">Événements</div></div>
+              <div class="stat-card"><div class="stat-number" id="statTeams">0</div><div class="stat-label">Équipes</div></div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2>Bienvenue sur TEAMUP</h2>
+            <div id="dashboardContent"></div>
+          </div>
+        </section>
+
+        <section id="page-messages" class="page hidden">
+          <div class="panel">
+            <h2>💬 Messagerie</h2>
+            <div id="messagesList"></div>
+            <hr />
+            <textarea id="messageInput" placeholder="Écrire un message..."></textarea>
+            <button class="btn" id="sendMessageBtn">Envoyer</button>
+          </div>
+        </section>
+
+        <section id="page-news" class="page hidden">
+          <div class="panel">
+            <h2>📢 Actualités du club</h2>
+            <div id="newsCreate" class="hidden">
+              <input id="newsTitle" placeholder="Titre de l’actualité" />
+              <textarea id="newsText" placeholder="Contenu de l’annonce"></textarea>
+              <button class="btn" id="publishNewsBtn">Publier l’actualité</button>
+              <hr />
+            </div>
+            <div id="newsList"></div>
+          </div>
+        </section>
+
+        <section id="page-calendar" class="page hidden">
+          <div class="panel">
+            <h2>📅 Calendrier du club</h2>
+            <div id="calendarContent"></div>
+          </div>
+        </section>
+
+        <section id="page-members" class="page hidden">
+          <div class="panel">
+            <h2>🧑‍🤝‍🧑 Membres du club</h2>
+            <input id="memberSearch" placeholder="Rechercher un membre..." />
+            <div id="membersList"></div>
+          </div>
+        </section>
+
+        <section id="page-account" class="page hidden">
+          <div class="panel">
+            <h2>👤 Mon compte</h2>
+            <div id="accountContent"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer>TEAMUP • La plateforme de gestion de votre club</footer>
+    <div id="toast"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

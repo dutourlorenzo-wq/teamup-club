@@ -1,0 +1,236 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg1: #090e25;
+  --bg2: #142b58;
+  --bg3: #315b9c;
+  --primary: #5685ff;
+  --primary2: #3569e8;
+  --white: #fff;
+  --muted: #b9c9ed;
+  --card: rgba(255, 255, 255, 0.09);
+  --line: rgba(255, 255, 255, 0.16);
+  --red: #f05c72;
+  --green: #26c995;
+  --orange: #f5b84b;
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--white);
+  font-family: Inter, Arial, sans-serif;
+  background: radial-gradient(circle at 15% 10%, #315b9c 0, transparent 35%),
+    radial-gradient(circle at 90% 90%, #203f77 0, transparent 35%),
+    linear-gradient(135deg, var(--bg1), var(--bg2) 55%, #101c3c);
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button { cursor: pointer; }
+
+.hidden { display: none !important; }
+
+#appHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 5%;
+  border-bottom: 1px solid var(--line);
+  background: rgba(8, 14, 35, 0.4);
+  backdrop-filter: blur(15px);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.logo { font-size: 25px; font-weight: 900; letter-spacing: 4px; }
+.logo span { color: #78a5ff; }
+.header-right { display: flex; align-items: center; gap: 12px; }
+main { max-width: 1250px; margin: auto; padding: 25px 18px 60px; }
+.panel {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 19px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+h1, h2, h3 { margin-top: 0; }
+h2 { font-size: 23px; }
+h3 { font-size: 17px; }
+.muted { color: var(--muted); }
+.small { font-size: 12px; color: var(--muted); }
+
+.btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 17px;
+  color: white;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary), var(--primary2));
+  transition: 0.2s;
+}
+.btn:hover { filter: brightness(1.13); transform: translateY(-1px); }
+.btn-secondary { background: rgba(255,255,255,0.12); border: 1px solid var(--line); }
+.btn-danger { background: linear-gradient(135deg, #ed6578, #bf334f); }
+.btn-green { background: linear-gradient(135deg, #20bd8d, #128965); }
+.btn-small { padding: 8px 11px; font-size: 12px; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px 14px;
+  margin: 7px 0;
+  border-radius: 10px;
+  border: 1px solid #d9e2f2;
+  background: #fff;
+  color: #192543;
+  outline: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: #6b95ff;
+  box-shadow: 0 0 0 3px #5685ff25;
+}
+textarea { min-height: 95px; resize: vertical; }
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 10px;
+  color: #e1eaff;
+}
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 15px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
+.auth-wrap {
+  min-height: calc(100vh - 90px);
+  display: grid;
+  place-items: center;
+}
+.auth-card {
+  width: min(100%, 470px);
+  padding: 34px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.11);
+  border: 1px solid rgba(255,255,255,0.22);
+  box-shadow: 0 25px 80px #0005;
+  backdrop-filter: blur(20px);
+}
+.auth-logo { text-align: center; font-size: 36px; font-weight: 900; letter-spacing: 6px; margin: 10px 0; }
+.auth-logo span { color: #91b5ff; }
+.auth-subtitle { text-align: center; color: var(--muted); margin-bottom: 25px; }
+.auth-tabs {
+  display: flex;
+  background: #07132e80;
+  border-radius: 12px;
+  padding: 4px;
+  margin: 20px 0;
+}
+.auth-tabs button {
+  flex: 1;
+  background: transparent;
+  color: #dce7ff;
+  border: 0;
+  padding: 11px;
+  border-radius: 9px;
+}
+.auth-tabs button.active { background: var(--primary); color: white; }
+.auth-section { margin-top: 10px; }
+.auth-help { text-align: center; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+.nav {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  background: #07132e66;
+  padding: 9px;
+  border: 1px solid var(--line);
+  border-radius: 15px
+}
+.nav button {
+  border: 0;
+  background: transparent;
+  color: #dce7ff;
+  padding: 11px 13px;
+  border-radius: 9px;
+  font-weight: 700;
+}
+.nav button.active { background: var(--primary); color: white; }
+
+.page { animation: fade .2s ease; }
+@keyframes fade { from { opacity: .5; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+.stat-card {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: rgba(255,255,255,0.06);
+}
+.stat-number { font-size: 30px; font-weight: 900; }
+.stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+.item {
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.05);
+  border-radius: 13px;
+  margin: 10px 0;
+}
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 30px;
+  background: rgba(255,255,255,0.12);
+  font-size: 11px;
+  font-weight: 700;
+}
+.badge-green { background: rgba(22,141,106,0.5); color: #8ff0ce; }
+.badge-red { background: rgba(232,78,102,0.4); color: #ffb2be; }
+.badge-orange { background: rgba(211,139,53,0.4); color: #ffdc99; }
+
+.password-field { display: flex; gap: 8px; align-items: center; }
+.password-field input { flex: 1; min-width: 0; }
+.password-field button { white-space: nowrap; }
+
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: #101d3b;
+  border: 1px solid var(--line);
+  padding: 13px 20px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  display: none;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 25px;
+  font-size: 12px;
+}
+
+@media (max-width: 650px) {
+  #appHeader { padding: 14px 16px; }
+  .logo { font-size: 21px; }
+  main { padding: 15px 10px 40px; }
+  .auth-card { padding: 23px 18px; }
+  .nav { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .nav button { font-size: 12px; padding: 12px 5px; }
+  .panel { padding: 16px; }
+}
